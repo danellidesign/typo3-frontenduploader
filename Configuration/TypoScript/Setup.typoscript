@@ -1,0 +1,44 @@
+config {
+    no_cache = 1
+    contentObjectExceptionHandler = 0
+}
+
+page = PAGE
+page {
+
+    10 = FLUIDTEMPLATE
+    10 {
+        templateName = Default
+        templateRootPaths {
+           0 = EXT:frontenduploader/Resources/Private/fluid/Templates/
+        }
+        partialRootPaths {
+           0 = EXT:frontenduploader/Resources/Private/fluid/Partials/
+        }
+        layoutRootPaths {
+            0 = EXT:frontenduploader/Resources/Private/fluid/Layouts/
+         }
+
+         variables {
+            content < styles.content.get
+         }
+
+
+    }
+
+}
+
+plugin.tx_frontenduploader {
+  persistence {
+    classes {
+      Danny\Frontenduploader\Domain\Model\FileReference {
+        mapping {
+      tableName = sys_file_reference
+      columns {
+        uid_local.mapOnProperty = originalFileIdentifier
+      }
+    }
+      }
+    }
+  }
+}
